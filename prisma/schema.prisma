@@ -1,0 +1,220 @@
+// JalRakshak AI - Water Crisis Intelligence Platform
+// Database Schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// User Management
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String?
+  role          String   @default("public") // public, expert, admin
+  institution   String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  incidents     Incident[]
+  reports       Report[]
+  chatSessions  ChatSession[]
+}
+
+// Water Incidents
+model Incident {
+  id              String   @id @default(cuid())
+  title           String
+  description     String
+  location        String
+  latitude        Float?
+  longitude       Float?
+  severity        String   @default("moderate") // low, moderate, high, critical
+  status          String   @default("reported") // reported, investigating, treating, resolved
+  pollutantType   String?
+  pollutantClass  String?  // organic, inorganic, heavy_metal, microbial
+  waterSource     String?  // river, lake, groundwater, municipal
+  reportedBy      String?
+  reporterId      String?
+  verifiedAt      DateTime?
+  resolvedAt      DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  images          IncidentImage[]
+  samples         WaterSample[]
+  treatments      TreatmentRecommendation[]
+  reporter        User?    @relation(fields: [reporterId], references: [id])
+}
+
+// Incident Images
+model IncidentImage {
+  id          String   @id @default(cuid())
+  incidentId  String
+  imageUrl    String
+  description String?
+  analysis    String?  // AI analysis result
+  aiTags      String?  // JSON array of detected tags
+  uploadedAt  DateTime @default(now())
+  
+  incident    Incident @relation(fields: [incidentId], references: [id], onDelete: Cascade)
+}
+
+// Water Samples
+model WaterSample {
+  id              String   @id @default(cuid())
+  incidentId      String?
+  location        String
+  ph              Float?
+  turbidity       Float?   // NTU
+  dissolvedOxygen Float?   // mg/L
+  bod             Float?   // Biochemical Oxygen Demand mg/L
+  cod             Float?   // Chemical Oxygen Demand mg/L
+  tds             Float?   // Total Dissolved Solids mg/L
+  temperature     Float?   // Celsius
+  nitrogen        Float?   // mg/L
+  phosphorus      Float?   // mg/L
+  heavyMetals     String?  // JSON object with metal concentrations
+  organicPollutants String?
+  microbialCount  Float?   // CFU/mL
+  collectedAt     DateTime @default(now())
+  analyzedAt      DateTime?
+  
+  incident        Incident? @relation(fields: [incidentId], references: [id], onDelete: SetNull)
+  treatments      TreatmentRecommendation[]
+}
+
+// Pollutant Profiles - from research data
+model PollutantProfile {
+  id                String   @id @default(cuid())
+  name              String
+  category          String   // organic, inorganic, heavy_metal, dye, antibiotic, phenol
+  description       String?
+  biodegradability  String   @default("moderate") // easy, moderate, difficult, recalcitrant
+  healthEffects     String?
+  treatmentMethods  String?  // JSON array of treatment methods
+  sdbwtSuitability  String?  // MPEC, ICPB, SPB suitability
+  researchReferences String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  treatments        TreatmentRecommendation[]
+}
+
+// Treatment Recommendations
+model TreatmentRecommendation {
+  id                  String   @id @default(cuid())
+  incidentId          String?
+  sampleId            String?
+  pollutantId         String?
+  systemType          String   // MPEC, ICPB, SPB
+  photosensitizerType String?
+  bacteriaType        String?
+  eetMechanism        String?  // direct, indirect, hopping
+  expectedRemoval     Float?   // percentage
+  energyRecovery      Boolean  @default(false)
+  reusePotential      Boolean  @default(false)
+  treatmentTime       Float?   // hours
+  confidenceScore     Float?   // 0-1
+  reasoning           String?  // AI explanation
+  warnings            String?  // JSON array of warnings
+  recommendedActions  String?  // JSON array
+  createdAt           DateTime @default(now())
+  
+  incident            Incident?     @relation(fields: [incidentId], references: [id], onDelete: SetNull)
+  sample              WaterSample?  @relation(fields: [sampleId], references: [id], onDelete: SetNull)
+  pollutant           PollutantProfile? @relation(fields: [pollutantId], references: [id], onDelete: SetNull)
+}
+
+// Simulation Results
+model Simulation {
+  id                  String   @id @default(cuid())
+  name                String?
+  systemType          String   // MPEC, ICPB, SPB
+  pollutantType       String
+  pollutantConcentration Float
+  sunlightIntensity   Float    // W/m²
+  photosensitizerDose Float
+  bacteriaConcentration Float?
+  residenceTime       Float    // hours
+  temperature         Float?
+  ph                  Float?
+  
+  predictedRemoval    Float?   // percentage
+  predictedEnergy     Float?   // kWh/m³
+  predictedTime       Float?   // hours
+  bottleneckFactors   String?  // JSON
+  recommendations     String?  // JSON
+  
+  createdAt           DateTime @default(now())
+}
+
+// Chat Sessions
+model ChatSession {
+  id          String   @id @default(cuid())
+  userId      String?
+  title       String?
+  context     String?  // research, treatment, general
+  messages    ChatMessage[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+// Chat Messages
+model ChatMessage {
+  id          String   @id @default(cuid())
+  sessionId   String
+  role        String   // user, assistant
+  content     String
+  createdAt   DateTime @default(now())
+  
+  session     ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
+
+// Reports
+model Report {
+  id          String   @id @default(cuid())
+  title       String
+  type        String   // incident, treatment, simulation
+  content     String   // JSON
+  generatedAt DateTime @default(now())
+  authorId    String?
+  
+  author      User?    @relation(fields: [authorId], references: [id], onDelete: SetNull)
+}
+
+// Knowledge Base - Research Papers
+model KnowledgeBase {
+  id          String   @id @default(cuid())
+  title       String
+  source      String?  // URL or file path
+  content     String   // Extracted text
+  category    String?  // SDBWT, MPEC, ICPB, SPB, general
+  metadata    String?  // JSON
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Treatment Systems - from research
+model TreatmentSystem {
+  id                  String   @id @default(cuid())
+  name                String
+  type                String   // MPEC, ICPB, SPB
+  description         String
+  photosensitizers    String?  // JSON array
+  bacteriaStrains     String?  // JSON array
+  eetTypes            String?  // JSON array
+  suitablePollutants  String?  // JSON array
+  advantages          String?  // JSON array
+  limitations         String?  // JSON array
+  applications        String?  // JSON array
+  researchRefs        String?  // JSON array
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
