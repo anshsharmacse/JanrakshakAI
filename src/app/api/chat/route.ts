@@ -49,16 +49,16 @@ const topicCitations: Record<string, Citation[]> = {
     journal: "Nature Communications",
     year: "2023",
     doi: "10.1038/s41467-023-40123-4",
-    findings: "Engineered Rhodopseudomonas achieved 78% COD removal without external catalysts"
+    findings: "Engineered Rhodopseudomonas achieved 78% COD removal"
   }],
   "eet": [{
     id: "4",
     authors: "Shi, L., Dong, H., Reguera, G., et al.",
-    title: "Extracellular electron transfer mechanisms in electroactive bacteria",
+    title: "Extracellular electron transfer mechanisms",
     journal: "Nature Reviews Microbiology",
     year: "2021",
     doi: "10.1038/nrmicro.2016.193",
-    findings: "Three EET mechanisms: direct cytochromes, indirect shuttles, and hopping through pili"
+    findings: "Three EET mechanisms: direct, indirect, and nanowire transfer"
   }],
   "indore": [{
     id: "6",
@@ -66,16 +66,7 @@ const topicCitations: Record<string, Citation[]> = {
     title: "Water Quality Assessment of Khan River, Indore",
     journal: "Central Pollution Control Board, India",
     year: "2023",
-    findings: "Khan River BOD 15x above limits; heavy metal contamination from textile industry"
-  }],
-  "dye": [{
-    id: "7",
-    authors: "Khan, M.A.N., Siddique, M., Wahid, F., Khan, R.",
-    title: "Removal of reactive dyes from textile wastewater",
-    journal: "Journal of Environmental Management",
-    year: "2023",
-    doi: "10.1016/j.jenvman.2023.118234",
-    findings: "ICPB achieved 95% dye removal within 24 hours under solar irradiation"
+    findings: "Khan River BOD 15x above limits"
   }]
 };
 
@@ -92,21 +83,19 @@ function getRelevantCitations(message: string): Citation[] {
   return citations.slice(0, 2);
 }
 
-// Intelligent fallback response generator
+// Intelligent response generator (fallback)
 function generateIntelligentResponse(message: string): { response: string; citations: Citation[] } {
   const lowerMsg = message.toLowerCase();
   const citations = getRelevantCitations(message);
   
-  // Greeting responses
   if (lowerMsg.match(/^(hi|hello|hey|greetings|namaste)/)) {
     return {
-      response: `Hello! 👋 I'm **JalRakshak AI**, your intelligent assistant created by Ansh Sharma.
+      response: `Hello! 👋 I'm **JalRakshak AI**, created by Ansh Sharma.
 
 I can help you with:
 - 💧 **Water Treatment**: MPEC, ICPB, SPB systems
 - 🔬 **Science & Research**: Environmental topics
-- 💻 **Programming**: Coding questions
-- 📚 **General Knowledge**: Any topic you want to discuss
+- 💻 **General Questions**: Any topic
 - 🎨 **Creative Tasks**: Writing, brainstorming
 
 How can I assist you today?`,
@@ -114,354 +103,242 @@ How can I assist you today?`,
     };
   }
   
-  // MPEC questions
   if (lowerMsg.includes("mpec")) {
     return {
-      response: `**MPEC (Microbial-Photo-Electrochemical Coupling)** is an innovative wastewater treatment system.
+      response: `**MPEC (Microbial-Photo-Electrochemical Coupling)**
 
 ## How It Works:
-MPEC combines photosensitizers with electrochemical systems to enable dual oxidation-reduction pathways. When sunlight hits the photosensitizer (typically TiO₂), it generates electrons that flow through an external circuit to a cathode, where electroactive bacteria like *Geobacter sulfurreducens* perform reduction reactions.
+MPEC combines photosensitizers with electrochemical systems. Sunlight triggers TiO₂ to generate electrons, which flow through an external circuit where electroactive bacteria (*Geobacter sulfurreducens*) perform reduction reactions.
 
 ## Key Benefits:
 - **Energy Recovery**: 0.5-1.2 kWh/m³
-- **High Efficiency**: 85-95% pollutant removal
+- **Efficiency**: 85-95% pollutant removal
 - **Best For**: Heavy metals, nitrates
-- **Key Bacteria**: *Geobacter sulfurreducens*, *Shewanella oneidensis*
 
 ## EET Mechanism:
-Direct electron transfer through c-type cytochromes and conductive pili (nanowires).
-
-Would you like more details on implementation?`,
+Direct electron transfer through c-type cytochromes and conductive pili.`,
       citations: topicCitations["mpec"]
     };
   }
   
-  // ICPB questions
   if (lowerMsg.includes("icpb")) {
     return {
-      response: `**ICPB (Intimately Coupled Photocatalysis & Biodegradation)** is a hybrid treatment system.
+      response: `**ICPB (Intimately Coupled Photocatalysis & Biodegradation)**
 
 ## How It Works:
-Photosensitizers (TiO₂/SiO₂) are coated on porous carriers where bacteria can colonize. When sunlight hits, the photocatalyst generates reactive species that partially oxidize pollutants, making them more biodegradable. Bacteria then complete the mineralization.
+Photosensitizers (TiO₂/SiO₂) on porous carriers support bacterial colonization. Sunlight triggers partial oxidation; bacteria complete mineralization.
 
 ## Key Benefits:
-- **High Efficiency**: 92-98% removal
+- **Efficiency**: 92-98% removal
 - **Best For**: Dyes, phenol, pharmaceuticals
-- **Key Bacteria**: *Pseudomonas putida*, *Bacillus subtilis*
-- **Complete Mineralization**: No harmful intermediates
-
-## EET Mechanism:
-Indirect electron transfer via electron shuttles (flavins, phenazines).
-
-Want to know about specific applications?`,
+- **Complete Mineralization**: No harmful intermediates`,
       citations: topicCitations["icpb"]
     };
   }
   
-  // SPB questions
   if (lowerMsg.includes("spb")) {
     return {
-      response: `**SPB (Self-Photosensitized Biohybrid)** is a fully biological treatment system.
+      response: `**SPB (Self-Photosensitized Biohybrid)**
 
 ## How It Works:
-Engineered bacteria (like *Rhodopseudomonas palustris*) produce their own photosensitizers internally. When exposed to light, these intrinsic photosensitizers enable the bacteria to perform phototrophic metabolism for pollutant degradation.
+Engineered bacteria (*Rhodopseudomonas palustris*) produce their own photosensitizers internally for phototrophic metabolism.
 
 ## Key Benefits:
-- **Self-Sustaining**: No external catalysts needed
-- **Eco-Friendly**: Fully biological system
-- **Research Stage**: Cutting-edge technology
-- **78% COD Removal**: Demonstrated efficiency
-
-## EET Mechanism:
-Self-generated electron carriers through bacterial metabolites.
-
-Interested in the genetic engineering aspects?`,
+- **Self-Sustaining**: No external catalysts
+- **Eco-Friendly**: Fully biological
+- **78% COD Removal**: Demonstrated efficiency`,
       citations: topicCitations["spb"]
     };
   }
   
-  // EET questions
   if (lowerMsg.includes("eet") || lowerMsg.includes("electron transfer")) {
     return {
-      response: `**Extracellular Electron Transfer (EET)** is the mechanism by which bacteria transfer electrons outside their cells.
+      response: `**Extracellular Electron Transfer (EET)**
 
-## Three Main EET Mechanisms:
+## Three Mechanisms:
+1. **Direct EET**: Via cytochromes (<1 μm), 40% higher efficiency
+2. **Indirect EET**: Via shuttles (flavins, phenazines), 1-10 μm
+3. **Nanowire EET**: Via conductive pili (>10 μm)
 
-### 1. Direct EET
-- Transfer via membrane-bound c-type cytochromes (OmcZ, OmcS)
-- Short range (<1 μm)
-- **40% higher efficiency**
-- Used by *Geobacter sulfurreducens*
-
-### 2. Indirect EET
-- Transfer via electron shuttles (flavins, phenazines)
-- Medium range (1-10 μm)
-- Used by *Shewanella oneidensis*
-
-### 3. Nanowire EET
-- Transfer via conductive pili/nanowires
-- Long range (>10 μm)
-- Enables biofilm networks
-
-## Applications:
-EET is crucial for MPEC systems and microbial fuel cells, enabling energy recovery during wastewater treatment.`,
+Essential for MPEC and microbial fuel cells.`,
       citations: topicCitations["eet"]
     };
   }
   
-  // Water crisis questions
-  if (lowerMsg.includes("indore") || lowerMsg.includes("khan river") || lowerMsg.includes("water crisis")) {
+  if (lowerMsg.includes("indore") || lowerMsg.includes("khan river")) {
     return {
-      response: `**Water Crisis in Indore - Khan River Contamination**
+      response: `**Indore Water Crisis - Khan River**
 
-## Current Situation:
-The Khan River in Indore, Madhya Pradesh is facing severe contamination:
+- **BOD**: 15x above limits
+- **Pollutants**: Industrial dyes & heavy metals
+- **Affected**: 150,000+ residents
 
-- **BOD Levels**: 15x above permissible limits
-- **Pollutants**: Industrial dyes & heavy metals from textile industry
-- **Affected**: 150,000+ residents across 23 villages
-- **Health Impact**: Skin diseases, gastrointestinal problems
-
-## Recommended Solutions:
-1. **ICPB System** for dye degradation (92-98% efficiency)
-2. **MPEC System** for heavy metal removal (85-95% efficiency)
-3. **Community Monitoring** with real-time sensors
-
-## Government Action:
-CPCB has identified the issue and is working with local authorities on remediation.
-
-Would you like details on implementing treatment systems?`,
+**Recommended**: ICPB (dyes) + MPEC (heavy metals)`,
       citations: topicCitations["indore"]
     };
   }
   
-  // Dye treatment
-  if (lowerMsg.includes("dye") || lowerMsg.includes("textile")) {
+  if (lowerMsg.includes("compare") || lowerMsg.includes("vs")) {
     return {
-      response: `**Dye Wastewater Treatment**
-
-Textile dyes are among the most challenging pollutants to treat due to their complex molecular structure.
-
-## Best Treatment: ICPB System
-
-**TiO₂/SiO₂ carriers** with *Pseudomonas putida* consortia achieve:
-- **95% dye removal** within 24 hours
-- Complete mineralization to CO₂ and H₂O
-- Works under solar irradiation
-
-## Treatment Process:
-1. Photocatalyst generates reactive species (OH•, O₂•−)
-2. Partial oxidation breaks dye chromophore
-3. Bacteria mineralize intermediates
-4. Clean water output
-
-## Key Parameters:
-- pH: 6.5-7.5
-- Sunlight: 6-8 hours/day
-- Carrier loading: 1.5-2.0 g/L
-
-Need help designing a treatment system?`,
-      citations: topicCitations["dye"]
-    };
-  }
-  
-  // Help response
-  if (lowerMsg.includes("help") || lowerMsg.includes("what can you do")) {
-    return {
-      response: `I'm **JalRakshak AI** - an intelligent assistant that can help with almost anything!
-
-## 🌊 Water Treatment Expertise:
-- MPEC, ICPB, SPB technologies
-- Photosensitizer selection
-- Bacteria and EET mechanisms
-- Treatment recommendations
-
-## 💻 General Capabilities:
-- Answer any question (like ChatGPT/Gemini)
-- Help with coding and programming
-- Explain scientific concepts
-- Creative writing and brainstorming
-- Research and analysis
-
-## 📝 Try Asking:
-- "What is MPEC technology?"
-- "Explain ICPB vs SPB systems"
-- "What's the water crisis in Indore?"
-- "How does EET work?"
-- "Compare treatment methods"
-
-What would you like to know?`,
-      citations: []
-    };
-  }
-  
-  // Compare systems
-  if (lowerMsg.includes("compare") || lowerMsg.includes("difference") || lowerMsg.includes("vs")) {
-    return {
-      response: `**Comparison of SDBWT Treatment Systems**
+      response: `**Treatment Systems Comparison**
 
 | Feature | MPEC | ICPB | SPB |
 |---------|------|------|-----|
-| **Removal Efficiency** | 85-95% | 92-98% | 78% |
-| **Energy Recovery** | ✅ Yes | ❌ No | Limited |
-| **External Catalyst** | Required | Required | Not needed |
-| **Complexity** | High | Medium | Low |
-| **Cost** | High | Medium | Low |
-| **Best For** | Heavy metals | Dyes/Pharma | Organics |
-
-## When to Use Each:
-
-### MPEC - When you need:
-- Heavy metal removal
-- Energy recovery
-- Nitrate reduction
-
-### ICPB - When you need:
-- Dye degradation
-- Pharmaceutical removal
-- Highest efficiency
-
-### SPB - When you need:
-- Low-cost solution
-- Organic waste treatment
-- Sustainable approach
-
-Need specific recommendations?`,
+| Efficiency | 85-95% | 92-98% | 78% |
+| Energy Recovery | ✅ | ❌ | Limited |
+| Best For | Metals | Dyes | Organics |
+| Cost | High | Medium | Low |`,
       citations: [topicCitations["mpec"][0], topicCitations["icpb"][0]]
     };
   }
   
-  // General knowledge fallback
+  if (lowerMsg.includes("help")) {
+    return {
+      response: `I'm **JalRakshak AI** - your intelligent assistant!
+
+## Specialties:
+- 💧 Water Treatment (MPEC, ICPB, SPB)
+- 🔬 Environmental Science
+- 💻 Programming & Coding
+- 📚 General Knowledge
+
+## Try:
+- "What is MPEC?"
+- "Compare ICPB vs SPB"
+- "Indore water crisis"`,
+      citations: []
+    };
+  }
+  
   return {
-    response: `Thank you for your question! As **JalRakshak AI**, I'm specialized in water treatment and environmental science, but I can also help with general topics.
+    response: `Thank you for your question! I specialize in water treatment and environmental science.
 
-## My Specialties:
-- 💧 **Water Treatment Technologies** (MPEC, ICPB, SPB)
-- 🔬 **Environmental Science**
-- 🧫 **Microbiology & EET Mechanisms**
-- 📊 **Treatment System Design**
-
-## Try asking me about:
+## Try asking:
 - "What is MPEC/ICPB/SPB?"
 - "Compare treatment systems"
-- "Water crisis in Indore"
-- "How does EET work?"
-- "Dye wastewater treatment"
-
-I'll provide detailed, research-backed answers with scientific citations!
-
-What would you like to know about water treatment or environmental science?`,
+- "Indore water crisis"
+- "How does EET work?"`,
     citations: []
   };
 }
 
-// ZAI SDK instance cache
-let zaiPromise: Promise<unknown> | null = null;
-
-async function getZAI() {
-  if (zaiPromise) return zaiPromise;
+// Call OpenAI API
+async function callOpenAI(message: string, history: Message[]): Promise<string | null> {
+  const apiKey = process.env.OPENAI_API_KEY;
   
-  zaiPromise = (async () => {
-    try {
-      const ZAI = (await import("z-ai-web-dev-sdk")).default;
-      const zai = await ZAI.create();
-      return zai;
-    } catch (error) {
-      console.error("Failed to initialize ZAI SDK:", error);
+  if (!apiKey || apiKey === "your_openai_api_key_here") {
+    return null;
+  }
+  
+  try {
+    const messages: Array<{ role: string; content: string }> = [
+      {
+        role: "system",
+        content: `You are JalRakshak AI, an intelligent assistant created by Ansh Sharma. 
+You are helpful, friendly, and knowledgeable about water treatment technologies (MPEC, ICPB, SPB systems), environmental science, and general topics.
+Be conversational and provide detailed, well-structured answers. Use markdown formatting.`
+      }
+    ];
+
+    for (const msg of history.slice(-10)) {
+      messages.push({
+        role: msg.role,
+        content: msg.content
+      });
+    }
+
+    messages.push({ role: "user", content: message });
+
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        model: "gpt-3.5-turbo",
+        messages: messages,
+        max_tokens: 1000,
+        temperature: 0.7
+      })
+    });
+
+    if (!response.ok) {
       return null;
     }
-  })();
-  
-  return zaiPromise;
+
+    const data = await response.json();
+    return data.choices?.[0]?.message?.content || null;
+  } catch {
+    return null;
+  }
+}
+
+// Try ZAI SDK (works in development environment)
+async function tryZAI(message: string, history: Message[]): Promise<string | null> {
+  try {
+    const ZAI = (await import("z-ai-web-dev-sdk")).default;
+    const zai = await ZAI.create();
+    
+    const messages: Array<{ role: string; content: string }> = [
+      {
+        role: "assistant",
+        content: `You are JalRakshak AI, created by Ansh Sharma. You are helpful, friendly, and knowledgeable. Provide detailed answers with markdown formatting.`
+      }
+    ];
+
+    for (const msg of history.slice(-10)) {
+      messages.push({
+        role: msg.role === "user" ? "user" : "assistant",
+        content: msg.content
+      });
+    }
+
+    messages.push({ role: "user", content: message });
+
+    const completion = await zai.chat.completions.create({
+      messages: messages,
+      thinking: { type: "disabled" }
+    });
+
+    return completion.choices?.[0]?.message?.content || null;
+  } catch {
+    return null;
+  }
 }
 
 export async function POST(request: NextRequest) {
-  let input: ChatInput | null = null;
-  
   try {
-    input = await request.json();
-    const { message, history } = input;
+    const { message, history }: ChatInput = await request.json();
 
-    // Try to use ZAI SDK for real AI responses
-    const zai = await getZAI() as {
-      chat: {
-        completions: {
-          create: (opts: { messages: Array<{ role: string; content: string }>; thinking: { type: string } }) => {
-            choices?: Array<{ message?: { content?: string } }>;
-          };
-        };
-      };
-    } | null;
-    
-    if (zai?.chat?.completions) {
-      try {
-        // Build messages array for the LLM
-        const messages: Array<{ role: string; content: string }> = [
-          {
-            role: "assistant",
-            content: `You are JalRakshak AI, an intelligent assistant created by Ansh Sharma. You are a helpful, friendly, and knowledgeable AI assistant.
-
-You can help users with ANY topic including water treatment, programming, science, and general questions.
-
-Your expertise includes:
-- Water treatment technologies (MPEC, ICPB, SPB systems)
-- Environmental science and pollution control
-- Solar-driven biological wastewater treatment
-
-Guidelines:
-- Be helpful, accurate, and conversational
-- Provide detailed, well-structured answers
-- Use bullet points and formatting when appropriate`
-          }
-        ];
-
-        // Add conversation history (last 10 messages for context)
-        for (const msg of history.slice(-10)) {
-          messages.push({
-            role: msg.role === "user" ? "user" : "assistant",
-            content: msg.content
-          });
-        }
-
-        // Add current user message
-        messages.push({ role: "user", content: message });
-
-        // Call the LLM
-        const completion = await zai.chat.completions.create({
-          messages: messages,
-          thinking: { type: "disabled" }
-        });
-
-        const responseText = completion.choices?.[0]?.message?.content;
-
-        if (responseText) {
-          const citations = getRelevantCitations(message);
-          return NextResponse.json({ 
-            response: responseText,
-            citations: citations
-          });
-        }
-      } catch (sdkError) {
-        console.error("SDK call failed, using intelligent fallback:", sdkError);
-        // Fall through to intelligent fallback
-      }
+    // 1. Try ZAI SDK (development environment)
+    const zaiResponse = await tryZAI(message, history || []);
+    if (zaiResponse) {
+      return NextResponse.json({
+        response: zaiResponse,
+        citations: getRelevantCitations(message)
+      });
     }
 
-    // Use intelligent fallback response
+    // 2. Try OpenAI API (production with API key)
+    const openaiResponse = await callOpenAI(message, history || []);
+    if (openaiResponse) {
+      return NextResponse.json({
+        response: openaiResponse,
+        citations: getRelevantCitations(message)
+      });
+    }
+
+    // 3. Fall back to intelligent responses
     const fallback = generateIntelligentResponse(message);
     return NextResponse.json(fallback);
 
-  } catch (error: unknown) {
+  } catch (error) {
     console.error("Chat API Error:", error);
     
-    const userMessage = input?.message || "";
-    
-    // Use intelligent fallback even on error
-    const fallback = generateIntelligentResponse(userMessage);
-    
     return NextResponse.json({
-      response: fallback.response,
-      citations: fallback.citations
+      response: "I'm having trouble processing your request. Please try asking about water treatment topics like MPEC, ICPB, or SPB.",
+      citations: []
     });
   }
 }
