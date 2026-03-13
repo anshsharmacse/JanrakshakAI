@@ -92,22 +92,6 @@ function getRelevantCitations(message: string): Citation[] {
   return citations.slice(0, 2);
 }
 
-// Lazy load ZAI SDK to avoid issues in serverless environments
-let zaiInstance: unknown = null;
-
-async function getZAI() {
-  if (zaiInstance) return zaiInstance;
-  
-  try {
-    const ZAI = (await import("z-ai-web-dev-sdk")).default;
-    zaiInstance = await ZAI.create();
-    return zaiInstance;
-  } catch (error) {
-    console.error("Failed to initialize ZAI SDK:", error);
-    return null;
-  }
-}
-
 // Intelligent fallback response generator
 function generateIntelligentResponse(message: string): { response: string; citations: Citation[] } {
   const lowerMsg = message.toLowerCase();
@@ -371,6 +355,26 @@ What would you like to know about water treatment or environmental science?`,
   };
 }
 
+// ZAI SDK instance cache
+let zaiPromise: Promise<unknown> | null = null;
+
+async function getZAI() {
+  if (zaiPromise) return zaiPromise;
+  
+  zaiPromise = (async () => {
+    try {
+      const ZAI = (await import("z-ai-web-dev-sdk")).default;
+      const zai = await ZAI.create();
+      return zai;
+    } catch (error) {
+      console.error("Failed to initialize ZAI SDK:", error);
+      return null;
+    }
+  })();
+  
+  return zaiPromise;
+}
+
 export async function POST(request: NextRequest) {
   let input: ChatInput | null = null;
   
@@ -379,39 +383,35 @@ export async function POST(request: NextRequest) {
     const { message, history } = input;
 
     // Try to use ZAI SDK for real AI responses
-    const zai = await getZAI();
+    const zai = await getZAI() as {
+      chat: {
+        completions: {
+          create: (opts: { messages: Array<{ role: string; content: string }>; thinking: { type: string } }) => {
+            choices?: Array<{ message?: { content?: string } }>;
+          };
+        };
+      };
+    } | null;
     
-    if (zai) {
+    if (zai?.chat?.completions) {
       try {
         // Build messages array for the LLM
-        const messages: Array<{ role: "user" | "assistant"; content: string }> = [
+        const messages: Array<{ role: string; content: string }> = [
           {
             role: "assistant",
-            content: `You are JalRakshak AI, an intelligent assistant created by Ansh Sharma. You are a helpful, friendly, and knowledgeable AI assistant - similar to ChatGPT or Gemini.
+            content: `You are JalRakshak AI, an intelligent assistant created by Ansh Sharma. You are a helpful, friendly, and knowledgeable AI assistant.
 
-You can help users with ANY topic:
-- General questions and conversations
-- Programming and coding questions
-- Science, technology, and research
-- Water treatment and environmental topics (your specialty)
-- Creative writing and content generation
-- Education and learning
-- And anything else the user asks about
+You can help users with ANY topic including water treatment, programming, science, and general questions.
 
 Your expertise includes:
 - Water treatment technologies (MPEC, ICPB, SPB systems)
 - Environmental science and pollution control
 - Solar-driven biological wastewater treatment
-- India's water crisis and solutions
 
 Guidelines:
 - Be helpful, accurate, and conversational
 - Provide detailed, well-structured answers
-- Use bullet points and formatting when appropriate
-- If you don't know something, admit it honestly
-- For water treatment topics, reference scientific research
-- Be friendly and engaging like ChatGPT or Gemini
-- Answer any question the user asks, not just water treatment`
+- Use bullet points and formatting when appropriate`
           }
         ];
 
@@ -454,7 +454,6 @@ Guidelines:
   } catch (error: unknown) {
     console.error("Chat API Error:", error);
     
-    const errorMessage = error instanceof Error ? error.message : "Unknown error";
     const userMessage = input?.message || "";
     
     // Use intelligent fallback even on error
