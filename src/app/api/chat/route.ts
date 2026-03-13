@@ -226,7 +226,7 @@ Essential for MPEC and microbial fuel cells.`,
 async function callOpenAI(message: string, history: Message[]): Promise<string | null> {
   const apiKey = process.env.OPENAI_API_KEY;
   
-  if (!apiKey || apiKey === "your_openai_api_key_here") {
+  if (!apiKey || apiKey === "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") {
     return null;
   }
   
