@@ -1,4 +1,5 @@
-# JalRakshak AI - Water Crisis Intelligence Platform - Inspired by Indore Water Crisis - 2026
+# JalRakshak AI - Water Crisis Intelligence Platform
+### Inspired by Indore Water Crisis - 2026
 
 <div align="center">
 
@@ -11,7 +12,7 @@
 
 **AI-Powered Water Crisis Intelligence & Solar-Driven Biological Wastewater Treatment Platform**
 
-[Live Demo](#) | [Documentation](#documentation) | [Architecture](#system-architecture) | [API Reference](#api-reference)
+[Live Demo](#) · [Documentation](#documentation) · [Architecture](#system-architecture) · [API Reference](#api-reference)
 
 ---
 
@@ -46,12 +47,12 @@
 
 ### Key Highlights
 
-- **Real-time Crisis Monitoring**: Track water contamination incidents across India
-- **AI Treatment Recommendations**: Neural network-powered treatment system suggestions
-- **Research-Backed**: All recommendations cite peer-reviewed scientific papers
-- **Multi-System Support**: MPEC, ICPB, and SPB treatment technologies
-- **Interactive Simulation**: Predict treatment outcomes before implementation
-- **Media Documentation**: Upload images/videos for incident reporting
+- **Real-time Crisis Monitoring** — Track water contamination incidents across India
+- **AI Treatment Recommendations** — Neural network-powered treatment system suggestions
+- **Research-Backed** — All recommendations cite peer-reviewed scientific papers
+- **Multi-System Support** — MPEC, ICPB, and SPB treatment technologies
+- **Interactive Simulation** — Predict treatment outcomes before implementation
+- **Media Documentation** — Upload images/videos for incident reporting
 
 ---
 
@@ -226,7 +227,7 @@ sequenceDiagram
 
 ```mermaid
 graph LR
-    subgraph InputLayer["Input Layer - 6 Features"]
+    subgraph InputLayer["Input Layer — 6 Features"]
         I1[Pollutant Type]
         I2[Concentration]
         I3[Sunlight Intensity]
@@ -235,19 +236,19 @@ graph LR
         I6[Temperature]
     end
 
-    subgraph HiddenLayer1["Hidden Layer 1 - 128 Neurons"]
+    subgraph HiddenLayer1["Hidden Layer 1 — 128 Neurons"]
         H1[Feature Extraction]
         H2[Normalization]
         H3[Pattern Recognition]
     end
 
-    subgraph HiddenLayer2["Hidden Layer 2 - 64 Neurons"]
+    subgraph HiddenLayer2["Hidden Layer 2 — 64 Neurons"]
         H4[Deep Processing]
         H5[Correlation Analysis]
         H6[Risk Assessment]
     end
 
-    subgraph OutputLayer["Output Layer - 5 Outputs"]
+    subgraph OutputLayer["Output Layer — 5 Outputs"]
         O1[MPEC Score]
         O2[ICPB Score]
         O3[SPB Score]
@@ -260,25 +261,20 @@ graph LR
     HiddenLayer2 --> OutputLayer
 ```
 
-### Neural Network Parameters
+### Neural Network Configuration
 
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#0891b2'}}}%%
-table
-    title Neural Network Configuration
-    | Parameter | Value | Description |
-    |-----------|-------|-------------|
-    | Input Neurons | 6 | Water quality parameters |
-    | Hidden Layer 1 | 128 neurons | Feature extraction |
-    | Hidden Layer 2 | 64 neurons | Deep processing |
-    | Output Neurons | 5 | Treatment system scores |
-    | Activation Function | ReLU | Hidden layers |
-    | Output Activation | Softmax | Classification |
-    | Learning Rate | 0.001 | Adam optimizer |
-    | Batch Size | 32 | Training batch |
-```
+| Parameter | Value | Description |
+|-----------|-------|-------------|
+| Input Neurons | 6 | Water quality parameters |
+| Hidden Layer 1 | 128 neurons | Feature extraction |
+| Hidden Layer 2 | 64 neurons | Deep processing |
+| Output Neurons | 5 | Treatment system scores |
+| Activation Function | ReLU | Hidden layers |
+| Output Activation | Softmax | Classification |
+| Learning Rate | 0.001 | Adam optimizer |
+| Batch Size | 32 | Training batch |
 
-### Training Data Sources
+### Training Data Distribution
 
 ```mermaid
 pie title Training Data Distribution
@@ -295,26 +291,26 @@ pie title Training Data Distribution
 ```mermaid
 flowchart TD
     A[Input Parameters] --> B{Pollutant Type?}
-    
+
     B -->|Heavy Metals| C[MPEC Pathway]
     B -->|Dyes/Phenol| D[ICPB Pathway]
     B -->|Organic Waste| E[SPB Pathway]
-    
+
     C --> F{Concentration?}
     D --> F
     E --> F
-    
+
     F -->|High >200mg/L| G[Extended Treatment]
     F -->|Moderate| H[Standard Treatment]
     F -->|Low <50mg/L| I[Quick Treatment]
-    
+
     G --> J{Sunlight Available?}
     H --> J
     I --> J
-    
+
     J -->|High| K[Optimal Efficiency]
     J -->|Low| L[UV Supplement Needed]
-    
+
     K --> M[Output Recommendation]
     L --> M
 ```
@@ -323,135 +319,121 @@ flowchart TD
 
 ## Treatment Systems
 
-### MPEC (Microbial Photoelectrochemical Systems)
+### MPEC — Microbial Photoelectrochemical Systems
 
 ```mermaid
 graph TB
-    subgraph MPEC["MPEC System - Microbial Photoelectrochemical"]
+    subgraph MPEC["MPEC System"]
         A[Sunlight] --> B[Photosensitizer TiO2/CdS]
         B --> C[Electron Generation]
         C --> D[Biofilm Formation]
         D --> E[Geobacter/Shewanella Bacteria]
         E --> F[Direct EET via Cytochromes]
         F --> G[Pollutant Degradation]
-        
+
         H[Anode] --> I[External Circuit]
         I --> J[Cathode]
         C --> H
         J --> K[Energy Recovery 0.5-1.2 kWh/m³]
     end
-    
+
     style A fill:#fbbf24,stroke:#f59e0b
     style G fill:#34d399,stroke:#10b981
     style K fill:#60a5fa,stroke:#3b82f6
 ```
 
-**Key Metrics:**
+**MPEC Performance Metrics**
 
-```mermaid
-%%{init: {'theme': 'base'}}%%
-table
-    title MPEC Performance Metrics
-    | Metric | Value | Unit |
-    |--------|-------|------|
-    | Removal Efficiency | 85-95 | % |
-    | Energy Recovery | 0.5-1.2 | kWh/m³ |
-    | Best For | Heavy metals, nitrates | - |
-    | Key Bacteria | Geobacter sulfurreducens | - |
-    | EET Mechanism | Direct via c-type cytochromes | - |
-    | Response Time | 12-24 | hours |
-```
+| Metric | Value | Unit |
+|--------|-------|------|
+| Removal Efficiency | 85–95 | % |
+| Energy Recovery | 0.5–1.2 | kWh/m³ |
+| Best For | Heavy metals, nitrates | — |
+| Key Bacteria | Geobacter sulfurreducens | — |
+| EET Mechanism | Direct via c-type cytochromes | — |
+| Response Time | 12–24 | hours |
 
-### ICPB (Intimately Coupled Photocatalysis and Biodegradation)
+---
+
+### ICPB — Intimately Coupled Photocatalysis and Biodegradation
 
 ```mermaid
 graph LR
-    subgraph ICPB["ICPB System - Intimately Coupled Photocatalysis Biodegradation"]
+    subgraph ICPB["ICPB System"]
         A[UV/Solar Light] --> B[TiO2/SiO2 Porous Carrier]
-        B --> C[Reactive Species OH•, O2•−]
+        B --> C["Reactive Species (OH•, O2•−)"]
         C --> D[Partial Oxidation]
         D --> E[Biofilm on Carrier]
         E --> F[Complete Mineralization]
-        
+
         G[Pollutant] --> D
         F --> H[CO2 + H2O + Biomass]
     end
-    
+
     style A fill:#fbbf24,stroke:#f59e0b
     style F fill:#34d399,stroke:#10b981
     style H fill:#a78bfa,stroke:#8b5cf6
 ```
 
-**Key Metrics:**
+**ICPB Performance Metrics**
 
-```mermaid
-%%{init: {'theme': 'base'}}%%
-table
-    title ICPB Performance Metrics
-    | Metric | Value | Unit |
-    |--------|-------|------|
-    | Removal Efficiency | 92-98 | % |
-    | Carrier Pore Size | 5 | nm optimal |
-    | Best For | Azo dyes, phenol, pharmaceuticals | - |
-    | Key Bacteria | Pseudomonas putida | - |
-    | EET Mechanism | Indirect via electron shuttles | - |
-    | Response Time | 18-36 | hours |
-```
+| Metric | Value | Unit |
+|--------|-------|------|
+| Removal Efficiency | 92–98 | % |
+| Carrier Pore Size | 5 | nm optimal |
+| Best For | Azo dyes, phenol, pharmaceuticals | — |
+| Key Bacteria | Pseudomonas putida | — |
+| EET Mechanism | Indirect via electron shuttles | — |
+| Response Time | 18–36 | hours |
 
-### SPB (Self-Photosensitized Biohybrids)
+---
+
+### SPB — Self-Photosensitized Biohybrids
 
 ```mermaid
 graph TB
-    subgraph SPB["SPB System - Self-Photosensitized Biohybrids"]
+    subgraph SPB["SPB System"]
         A[Engineered Bacteria] --> B[Intrinsic Photosensitizer]
         B --> C[Self-sustaining Cycle]
         C --> D[Pollutant Degradation]
         D --> E[CO2 + H2O]
-        
+
         F[CRISPR Engineering] --> A
         G[Rhodopseudomonas] --> A
-        
+
         H[Light] --> B
         B --> I[Intracellular Electron Transport]
         I --> D
     end
-    
+
     style A fill:#a78bfa,stroke:#8b5cf6
     style E fill:#34d399,stroke:#10b981
     style F fill:#f472b6,stroke:#ec4899
 ```
 
-**Key Metrics:**
+**SPB Performance Metrics**
 
-```mermaid
-%%{init: {'theme': 'base'}}%%
-table
-    title SPB Performance Metrics
-    | Metric | Value | Unit |
-    |--------|-------|------|
-    | Removal Efficiency | 78 | % |
-    | Stability | 30+ | generations |
-    | Best For | Organic compounds | - |
-    | Key Bacteria | Rhodopseudomonas palustris | - |
-    | EET Mechanism | Self-generated carriers | - |
-    | External Catalyst | Not Required | - |
-```
+| Metric | Value | Unit |
+|--------|-------|------|
+| Removal Efficiency | 78 | % |
+| Stability | 30+ | generations |
+| Best For | Organic compounds | — |
+| Key Bacteria | Rhodopseudomonas palustris | — |
+| EET Mechanism | Self-generated carriers | — |
+| External Catalyst | Not Required | — |
+
+---
 
 ### System Comparison
 
-```mermaid
-%%{init: {'theme': 'base'}}%%
-table
-    title Treatment Systems Comparison
-    | Feature | MPEC | ICPB | SPB |
-    |---------|------|------|-----|
-    | Removal Efficiency | 85-95% | 92-98% | 78% |
-    | Energy Recovery | Yes | No | Limited |
-    | External Catalyst | Required | Required | Not Required |
-    | Complexity | High | Medium | Low |
-    | Cost | High | Medium | Low |
-    | Best For | Heavy Metals | Dyes/Pharma | Organics |
-```
+| Feature | MPEC | ICPB | SPB |
+|---------|------|------|-----|
+| Removal Efficiency | 85–95% | 92–98% | 78% |
+| Energy Recovery | ✅ Yes | ❌ No | ⚠️ Limited |
+| External Catalyst | Required | Required | Not Required |
+| Complexity | High | Medium | Low |
+| Cost | High | Medium | Low |
+| Best For | Heavy Metals | Dyes / Pharma | Organics |
 
 ---
 
@@ -461,88 +443,68 @@ table
 graph TB
     subgraph EET["Extracellular Electron Transfer Mechanisms"]
         A[Electron Source] --> B{Transfer Type}
-        
+
         B --> C[Direct EET]
         B --> D[Indirect EET]
         B --> E[Nanowire EET]
-        
-        C --> F[c-type Cytochromes<br/>OmcZ, OmcS]
-        D --> G[Electron Shuttles<br/>Flavins, Phenazines]
-        E --> H[Conductive Pili<br/>Nanowires]
-        
-        F --> I[40% Higher Efficiency<br/>Short Range]
-        G --> J[Flexible Range<br/>Medium Distance]
-        H --> K[Long Distance Transfer<br/>Biofilm Networks]
+
+        C --> F["c-type Cytochromes — OmcZ, OmcS"]
+        D --> G["Electron Shuttles — Flavins, Phenazines"]
+        E --> H["Conductive Pili — Nanowires"]
+
+        F --> I["40% Higher Efficiency — Short Range"]
+        G --> J["Flexible Range — Medium Distance"]
+        H --> K["Long Distance Transfer — Biofilm Networks"]
     end
-    
+
     style I fill:#34d399,stroke:#10b981
     style C fill:#60a5fa,stroke:#3b82f6
     style D fill:#fbbf24,stroke:#f59e0b
     style E fill:#a78bfa,stroke:#8b5cf6
 ```
 
-### EET Mechanism Details
+### EET Mechanism Comparison
 
-```mermaid
-%%{init: {'theme': 'base'}}%%
-table
-    title EET Mechanism Comparison
-    | Mechanism | Carrier | Distance | Efficiency | Bacteria |
-    |-----------|---------|----------|------------|----------|
-    | Direct EET | c-type Cytochromes | <1 μm | High (40%+) | Geobacter |
-    | Indirect EET | Flavins, Phenazines | 1-10 μm | Medium | Shewanella |
-    | Nanowire EET | Conductive Pili | >10 μm | Variable | Geobacter |
-```
+| Mechanism | Carrier | Distance | Efficiency | Bacteria |
+|-----------|---------|----------|------------|----------|
+| Direct EET | c-type Cytochromes | < 1 μm | High (40%+) | Geobacter |
+| Indirect EET | Flavins, Phenazines | 1–10 μm | Medium | Shewanella |
+| Nanowire EET | Conductive Pili | > 10 μm | Variable | Geobacter |
 
 ---
 
 ## Technology Stack
 
-### Frontend Stack
+### Frontend
 
-```mermaid
-%%{init: {'theme': 'base'}}%%
-table
-    title Frontend Technologies
-    | Technology | Version | Purpose |
-    |------------|---------|---------|
-    | Next.js | 16 | React framework with App Router |
-    | TypeScript | 5 | Type-safe development |
-    | Tailwind CSS | 4 | Utility-first styling |
-    | shadcn/ui | Latest | Component library |
-    | Framer Motion | 12 | Animations |
-    | Lucide Icons | Latest | Icon library |
-    | React | 19 | UI library |
-    | Zustand | 5 | State management |
-```
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| Next.js | 16 | React framework with App Router |
+| TypeScript | 5 | Type-safe development |
+| Tailwind CSS | 4 | Utility-first styling |
+| shadcn/ui | Latest | Component library |
+| Framer Motion | 12 | Animations |
+| Lucide Icons | Latest | Icon library |
+| React | 19 | UI library |
+| Zustand | 5 | State management |
 
-### Backend Stack
+### Backend
 
-```mermaid
-%%{init: {'theme': 'base'}}%%
-table
-    title Backend Technologies
-    | Technology | Version | Purpose |
-    |------------|---------|---------|
-    | Next.js API Routes | 16 | Serverless API endpoints |
-    | Prisma ORM | 6 | Database management |
-    | SQLite | 3 | Embedded database |
-    | z-ai-web-dev-sdk | Latest | AI/LLM integration |
-```
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| Next.js API Routes | 16 | Serverless API endpoints |
+| Prisma ORM | 6 | Database management |
+| SQLite | 3 | Embedded database |
+| z-ai-web-dev-sdk | Latest | AI/LLM integration |
 
 ### Development Tools
 
-```mermaid
-%%{init: {'theme': 'base'}}%%
-table
-    title Development Tools
-    | Tool | Purpose |
-    |------|---------|
-    | Bun | Package manager & runtime |
-    | ESLint | Code linting |
-    | TypeScript | Type checking |
-    | Prisma CLI | Database migrations |
-```
+| Tool | Purpose |
+|------|---------|
+| Bun | Package manager & runtime |
+| ESLint | Code linting |
+| TypeScript | Type checking |
+| Prisma CLI | Database migrations |
 
 ---
 
@@ -550,18 +512,13 @@ table
 
 ### Prerequisites
 
-```mermaid
-%%{init: {'theme': 'base'}}%%
-table
-    title System Requirements
-    | Requirement | Version | Notes |
-    |-------------|---------|-------|
-    | Node.js | 18+ | or Bun runtime |
-    | Bun | Latest | Recommended |
-    | Git | Latest | Version control |
-    | RAM | 4GB+ | Recommended |
-    | Storage | 500MB+ | For dependencies |
-```
+| Requirement | Version | Notes |
+|-------------|---------|-------|
+| Node.js | 18+ | or Bun runtime |
+| Bun | Latest | Recommended |
+| Git | Latest | Version control |
+| RAM | 4 GB+ | Recommended |
+| Storage | 500 MB+ | For dependencies |
 
 ### Clone and Setup
 
@@ -625,42 +582,30 @@ AI_API_KEY=your_api_key_here
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
-### Environment Configuration
-
-```mermaid
-%%{init: {'theme': 'base'}}%%
-table
-    title Environment Variables
-    | Variable | Required | Default | Description |
-    |----------|----------|---------|-------------|
-    | DATABASE_URL | Yes | - | SQLite database path |
-    | AI_API_KEY | No | - | API key for LLM features |
-    | NEXT_PUBLIC_APP_URL | No | http://localhost:3000 | Application URL |
-```
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| `DATABASE_URL` | ✅ Yes | — | SQLite database path |
+| `AI_API_KEY` | ⚠️ Optional | — | API key for LLM features |
+| `NEXT_PUBLIC_APP_URL` | ⚠️ Optional | `http://localhost:3000` | Application URL |
 
 ---
 
 ## API Reference
 
-### API Endpoints Overview
+### Endpoints
 
-```mermaid
-%%{init: {'theme': 'base'}}%%
-table
-    title API Endpoints
-    | Endpoint | Method | Description |
-    |----------|--------|-------------|
-    | /api/recommend | POST | Get treatment recommendations |
-    | /api/chat | POST | AI chatbot conversation |
-    | /api/incidents | GET | Fetch all incidents |
-    | /api/incidents | POST | Create new incident |
-    | /api/incidents | DELETE | Remove incident |
-    | /api/simulate | POST | Run treatment simulation |
-```
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/recommend` | `POST` | Get treatment recommendations |
+| `/api/chat` | `POST` | AI chatbot conversation |
+| `/api/incidents` | `GET` | Fetch all incidents |
+| `/api/incidents` | `POST` | Create new incident |
+| `/api/incidents` | `DELETE` | Remove incident |
+| `/api/simulate` | `POST` | Run treatment simulation |
 
-### Treatment Recommendation API
+---
 
-**Endpoint:** `POST /api/recommend`
+### `POST /api/recommend` — Treatment Recommendation
 
 **Request Body:**
 ```json
@@ -706,9 +651,9 @@ table
 }
 ```
 
-### AI Chat API
+---
 
-**Endpoint:** `POST /api/chat`
+### `POST /api/chat` — AI Chat
 
 **Request Body:**
 ```json
@@ -733,9 +678,9 @@ table
 }
 ```
 
-### Incidents API
+---
 
-**Endpoint:** `GET /api/incidents`
+### `GET /api/incidents` — List Incidents
 
 **Response:**
 ```json
@@ -800,7 +745,7 @@ jalrakshak-ai/
 │   │       ├── 📄 button.tsx
 │   │       ├── 📄 card.tsx
 │   │       ├── 📄 dialog.tsx
-│   │       └── ... (40 more)
+│   │       └── ...
 │   ├── 📁 hooks/
 │   │   ├── 📄 use-toast.ts          # Toast notifications
 │   │   └── 📄 use-mobile.ts         # Mobile detection
@@ -812,34 +757,29 @@ jalrakshak-ai/
 ├── 📁 public/
 │   ├── 🖼️ logo.svg                  # JalRakshak AI logo
 │   └── 📄 robots.txt                # SEO robots file
-├── 📄 package.json                  # Dependencies & scripts
-├── 📄 tsconfig.json                 # TypeScript config
-├── 📄 next.config.ts                # Next.js configuration
-├── 📄 tailwind.config.ts            # Tailwind CSS config
-├── 📄 postcss.config.mjs            # PostCSS config
-├── 📄 eslint.config.mjs             # ESLint config
-├── 📄 components.json               # shadcn/ui config
-├── 📄 vercel.json                   # Vercel deployment
-├── 📄 .env.example                  # Environment template
-├── 📄 .gitignore                    # Git ignore rules
-├── 📄 LICENSE                       # MIT License
-└── 📄 README.md                     # This file
+├── 📄 package.json
+├── 📄 tsconfig.json
+├── 📄 next.config.ts
+├── 📄 tailwind.config.ts
+├── 📄 postcss.config.mjs
+├── 📄 eslint.config.mjs
+├── 📄 components.json
+├── 📄 vercel.json
+├── 📄 .env.example
+├── 📄 .gitignore
+├── 📄 LICENSE
+└── 📄 README.md
 ```
 
-### File Statistics
+### Project Statistics
 
-```mermaid
-%%{init: {'theme': 'base'}}%%
-table
-    title Project Statistics
-    | Category | Count | Lines of Code |
-    |----------|-------|---------------|
-    | Source Files | 60+ | ~5000+ |
-    | UI Components | 43 | ~3000 |
-    | API Routes | 4 | ~800 |
-    | Database Models | 12 | ~220 |
-    | Total | 94+ | ~9000+ |
-```
+| Category | Count | Lines of Code |
+|----------|-------|---------------|
+| Source Files | 60+ | ~5,000+ |
+| UI Components | 43 | ~3,000 |
+| API Routes | 4 | ~800 |
+| Database Models | 12 | ~220 |
+| **Total** | **94+** | **~9,000+** |
 
 ---
 
@@ -847,23 +787,18 @@ table
 
 This platform is built upon peer-reviewed research:
 
-```mermaid
-%%{init: {'theme': 'base'}}%%
-table
-    title Research Citations
-    | ID | Citation | Key Finding |
-    |----|----------|-------------|
-    | 1 | Zhou, M., et al. (2022). Bioresource Technology | MPEC systems: 85-95% pollutant removal |
-    | 2 | Li, J., et al. (2023). Environmental Science & Technology | Direct EET: 40% higher efficiency |
-    | 3 | Wang, X., et al. (2023). Water Research | ICPB: 92-98% azo dye removal |
-    | 4 | Chen, H., et al. (2022). Chemical Engineering Journal | Optimal carrier pore size: 5nm |
-    | 5 | Zhang, Q., et al. (2023). Nature Communications | SPB: 78% COD removal |
-    | 6 | Liu, S., et al. (2024). Trends in Biotechnology | CRISPR stability: 30+ generations |
-    | 7 | Shi, L., et al. (2021). Nature Reviews Microbiology | Three EET mechanisms identified |
-    | 8 | Khan, M.A.N., et al. (2023). J. Environmental Management | ICPB: 95% dye removal in 24h |
-    | 9 | Wang, G., et al. (2022). Environmental Pollution | MPEC: 85-92% heavy metal removal |
-    | 10 | CPCB Report (2023). Khan River Assessment | BOD 15x above permissible limits |
-```
+| ID | Citation | Key Finding |
+|----|----------|-------------|
+| 1 | Zhou, M., et al. (2022). *Bioresource Technology* | MPEC systems: 85–95% pollutant removal |
+| 2 | Li, J., et al. (2023). *Environmental Science & Technology* | Direct EET: 40% higher efficiency |
+| 3 | Wang, X., et al. (2023). *Water Research* | ICPB: 92–98% azo dye removal |
+| 4 | Chen, H., et al. (2022). *Chemical Engineering Journal* | Optimal carrier pore size: 5 nm |
+| 5 | Zhang, Q., et al. (2023). *Nature Communications* | SPB: 78% COD removal |
+| 6 | Liu, S., et al. (2024). *Trends in Biotechnology* | CRISPR stability: 30+ generations |
+| 7 | Shi, L., et al. (2021). *Nature Reviews Microbiology* | Three EET mechanisms identified |
+| 8 | Khan, M.A.N., et al. (2023). *J. Environmental Management* | ICPB: 95% dye removal in 24 h |
+| 9 | Wang, G., et al. (2022). *Environmental Pollution* | MPEC: 85–92% heavy metal removal |
+| 10 | CPCB Report (2023). *Khan River Assessment* | BOD 15× above permissible limits |
 
 ### Citation Network
 
@@ -875,7 +810,7 @@ graph LR
         R3[Nature Communications] --> T3[SPB Technology]
         R4[Nature Reviews Microbiology] --> EET[EET Mechanisms]
     end
-    
+
     subgraph Application["Platform Features"]
         T1 --> REC[Treatment Recommender]
         T2 --> REC
@@ -884,7 +819,7 @@ graph LR
         REC --> AI[AI Chatbot]
         SIM --> AI
     end
-    
+
     style R1 fill:#0891b2
     style R2 fill:#0891b2
     style R3 fill:#0891b2
@@ -910,47 +845,35 @@ flowchart LR
     H -->|Changes Needed| C
 ```
 
-### Contribution Guidelines
-
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
 5. Open a Pull Request
 
-### Code Style
+### Code Style Guidelines
 
-```mermaid
-%%{init: {'theme': 'base'}}%%
-table
-    title Code Style Guidelines
-    | Aspect | Standard |
-    |--------|----------|
-    | Language | TypeScript |
-    | Framework | Next.js 16 App Router |
-    | Styling | Tailwind CSS |
-    | Components | shadcn/ui |
-    | Linting | ESLint |
-    | Formatting | Prettier |
-```
+| Aspect | Standard |
+|--------|----------|
+| Language | TypeScript |
+| Framework | Next.js 16 App Router |
+| Styling | Tailwind CSS |
+| Components | shadcn/ui |
+| Linting | ESLint |
+| Formatting | Prettier |
 
 ---
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
 
-```mermaid
-%%{init: {'theme': 'base'}}%%
-table
-    title License Summary
-    | Permission | Condition | Limitation |
-    |-------------|-----------|------------|
-    | ✅ Commercial use | License and copyright notice | ❌ Liability |
-    | ✅ Modification | Same license | ❌ Warranty |
-    | ✅ Distribution | - | - |
-    | ✅ Private use | - | - |
-```
+| Permission | Condition | Limitation |
+|------------|-----------|------------|
+| ✅ Commercial use | License and copyright notice required | ❌ Liability |
+| ✅ Modification | Same license | ❌ Warranty |
+| ✅ Distribution | — | — |
+| ✅ Private use | — | — |
 
 ---
 
@@ -966,33 +889,26 @@ table
 
 **Emergency Hotline:** +91-9981762011
 
+| Type | Value |
+|------|-------|
+| Creator | Ansh Sharma |
+| LinkedIn | [linkedin.com/in/anshsharmacse](https://www.linkedin.com/in/anshsharmacse/) |
+| Emergency | +91-9981762011 |
+| Project | JalRakshak AI |
+| Year | 2026 |
+
 </div>
-
-### Contact Information
-
-```mermaid
-%%{init: {'theme': 'base'}}%%
-table
-    title Contact Details
-    | Type | Value |
-    |------|-------|
-    | Creator | Ansh Sharma |
-    | LinkedIn | linkedin.com/in/anshsharmacse |
-    | Emergency | +91-9981762011 |
-    | Project | JalRakshak AI |
-    | Year | 2026 |
-```
 
 ---
 
 <div align="center">
 
-**JalRakshak AI** - Protecting India's Water Future
+**JalRakshak AI** — Protecting India's Water Future
 
 *Research-driven AI technology for sustainable water treatment*
 
-![Footer](https://img.shields.io/badge/Made%20with%E2%9D%A4%EF%B8%8F%20by-Ansh%20Sharma-teal?style=for-the-badge)
+![Footer](https://img.shields.io/badge/Made%20with%20%E2%9D%A4%EF%B8%8F%20by-Ansh%20Sharma-teal?style=for-the-badge)
 
-**Inspired by the Indore Water Crisis - 2026**
+**Inspired by the Indore Water Crisis — 2026**
 
 </div>
